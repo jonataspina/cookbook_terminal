@@ -1,26 +1,5 @@
-=begin
-def menu
-    puts "Bem-vindo ao My Cookbook, sua rede social de receitas culinárias!\n\n"
+require_relative "receita.rb"
 
-    puts "[1] Cadastrar uma receita"
-    puts "[2] Ver todas as receitas"
-    puts "[3] Sair\n\n"
-
-    opcao = -1
-    while opcao != 1 && opcao != 2 && opcao != 3
-        print "Escolha uma opção: "
-        opcao = gets.chomp.to_i
-        
-        puts "\n"
-
-        if(opcao != 1 && opcao != 2 && opcao != 3)
-            puts "Opção inválida. :(\n\n"
-        end 
-    end 
-
-    opcao
-end 
-=end
 require 'io/console'                                                                                                       
 
 #Método usado para aguardar um input do teclado do usuário
@@ -58,22 +37,37 @@ end
 receitas = []
 opcao = -1
 
-while opcao != 3
+#Realiza loop até que o usuário digite a opção para sair
+while opcao != 3   
+    #Chama o menu e recebe uma opção válida
     opcao = menu
 
     case opcao 
+    #Cadastro de receita
     when 1
         print "\nDigite o nome da sua receita: "
         nome_receita = gets.chomp
-        receitas << nome_receita
-        puts "\nReceita de #{nome_receita} cadastrada com sucesso!"
+        
+        print "Digite o modo de preparo: "
+        modo_preparo = gets.chomp
+
+        print "Digite o tipo da receita: "
+        tipo_receita = gets.chomp
+
+        nova_receita = Receita.new(nome_receita, modo_preparo, tipo_receita)
+        receitas << nova_receita
+        puts "\nReceita de #{nova_receita.nome} cadastrada com sucesso!"
+    
+    #Impressão de receitas
     when 2
         puts "\n"
         receitas.each_with_index do |r, index|
-            puts "##{index+1} " + r 
+            puts "##{index+1} #{r.nome} - #{r.tipo}" 
+            puts "\t#{r.modo_preparo}" 
         end
     end
 
+    #Se não for sair, aguarda o usuário pressionar uma tecla para continuar
     if(opcao != 3)
         pressione_para_continuar
     end
