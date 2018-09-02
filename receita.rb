@@ -1,8 +1,10 @@
 class Receita 
-    attr_reader :nome, :modo_preparo, :tipo
-    attr_writer :modo_preparo, :tipo
+    attr_reader :id, :nome 
+    attr_accessor :modo_preparo, :tipo
     
-    def initialize(nome, modo_preparo=nil, tipo=nil)
+    def initialize(id, nome, modo_preparo=nil, tipo=nil)
+        
+        @id = id
         @nome = nome
         @modo_preparo = modo_preparo
         @tipo = tipo
